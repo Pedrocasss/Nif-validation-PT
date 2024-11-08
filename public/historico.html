@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de NIFs</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>Histórico de NIFs Validados</h2>
+    <div id="nifHistory" class="history-container">
+        <!-- Os dados do NIF serão inseridos aqui -->
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('http://localhost:3000/historico-nifs')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro na resposta do servidor');
+                }
+                return response.json();
+            })
+            .then(nifs => {
+                console.log('NIFs recebidos:', nifs); // Depuração adicional para verificar os dados recebidos
+
+                const historicoDiv = document.getElementById("nifHistory");
+                historicoDiv.innerHTML = ""; // Limpa o histórico anterior
+
+                if (nifs.length === 0) {
+                    historicoDiv.innerHTML = "<div class='history-item'>Nenhum NIF validado encontrado.</div>";
+                    return;
+                }
+
+                nifs.forEach((nifData, index) => {
+                    // Parseia a string JSON para um objeto
+                    const nifObj = JSON.parse(nifData);
+                    
+                    // Separa a data e a hora do timestamp
+                    const timestamp = new Date(nifObj.timestamp);
+                    const data = timestamp.toLocaleDateString('pt-PT'); // Formata a data
+                    const hora = timestamp.toLocaleTimeString('pt-PT'); // Formata a hora
+
+                    const historyItem = document.createElement("div");
+                    historyItem.className = 'history-item';
+                    historyItem.innerHTML = `
+                        <h3>NIF: ${nifObj.nif}</h3>
+                        <p><strong>Tipo:</strong> ${nifObj.tipo || 'Desconhecido'}</p>
+                        <p><strong>Data:</strong> ${data}</p>
+                        <p><strong>Hora:</strong> ${hora}</p>
+                    `;
+                    historicoDiv.appendChild(historyItem);
+                });
+            })
+            .catch(error => console.error('Erro ao carregar histórico:', error));
+        });
+    </script>
+</body>
+</html>

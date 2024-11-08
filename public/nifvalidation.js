@@ -7,7 +7,7 @@ function validarContribuinte() {
     const numeroContribuinte = document.getElementById("nifInput").value;
     let divFeedback = document.getElementById("feedback");
     let erroEncontrado = 0;
-    let tipoContribuinte = 'Desconhecido'; // Inicializa o tipo de contribuinte como desconhecido
+    let tipoContribuinte = 'Desconhecido'; 
 
     // Lógica de validação de NIF
     if (
@@ -94,7 +94,7 @@ function validarContribuinte() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ nif: numeroContribuinte, tipo: tipoContribuinte }) // Inclui o tipo no corpo
+            body: JSON.stringify({ nif: numeroContribuinte, tipo: tipoContribuinte }) 
         })
         .then(response => response.json())
         .then(data => {

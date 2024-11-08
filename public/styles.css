@@ -81,10 +81,10 @@ button:hover {
     border-radius: 8px;
     background-color: white;
     transition: background-color 0.3s, transform 0.3s;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para um efeito de profundidade */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .history-item:hover {
     background-color: #e7f0ff;
-    transform: translateY(-3px); /* Eleva levemente o cartão ao passar o mouse */
+    transform: translateY(-3px); 
 }

@@ -13,7 +13,7 @@ client.connect().then(() => {
 });
 
     app.use(cors({
-        origin: '*', // ou especificar o domínio de onde você está acessando
+        origin: '*', 
         methods: 'GET,POST'
     }));
 app.use(express.json());
@@ -49,8 +49,6 @@ app.get('/historico', (req, res) => {
     });
 });
 
-// Rota para validar e armazenar o NIF
-// Rota para validar e armazenar o NIF
 // Rota para validar e armazenar o NIF
 app.post('/validar-nif', (req, res) => {
     const { nif, tipo } = req.body; // Recebe o tipo
